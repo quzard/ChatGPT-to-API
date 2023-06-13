@@ -38,19 +38,14 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/one-api
+            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-to-api
             ghcr.io/${{ github.repository }}
 
-
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v4
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3
         with:
           context: .
-          push: true
-          labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-to-api:${{ github.ref_name }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-to-api:latest
-            ghcr.io/${{ github.repository }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
