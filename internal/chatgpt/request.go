@@ -158,7 +158,6 @@ func Handler(c *gin.Context, response *http.Response, token string, translated_r
 	var finish_reason string
 	var previous_text typings.StringStruct
 	var original_response chatgpt_types.ChatGPTResponse
-	counter := 0
 	for {
 		line, err := reader.ReadString('\n')
 		if err != nil {
@@ -189,8 +188,7 @@ func Handler(c *gin.Context, response *http.Response, token string, translated_r
 			if original_response.Message.Author.Role != "assistant" || original_response.Message.Content.Parts == nil {
 				continue
 			}
-			if counter < 3 {
-				counter++
+			if original_response.Message.Metadata.MessageType != "next" {
 				continue
 			}
 			response_string := chatgpt_response_converter.ConvertToString(&original_response, &previous_text)
