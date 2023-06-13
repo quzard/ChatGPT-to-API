@@ -3,7 +3,7 @@ name: build_docker
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build_docker:

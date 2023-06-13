@@ -15,5 +15,5 @@ jobs:
         with:
           token: ${{ secrets.TOKEN}}
           owner: acheong08
-          base: main
-          head: main
+          base: master
+          head: master
