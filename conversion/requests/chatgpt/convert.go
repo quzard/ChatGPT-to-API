@@ -24,7 +24,8 @@ func randint(min int, max int) int {
 func ConvertAPIRequest(api_request official_types.APIRequest) chatgpt_types.ChatGPTRequest {
 	chatgpt_request := chatgpt_types.NewChatGPTRequest()
 	if strings.HasPrefix(api_request.Model, "gpt-3.5") {
-		chatgpt_request.Model = "text-davinci-002-render-sha"
+		// chatgpt_request.Model = "text-davinci-002-render-sha"
+		chatgpt_request.Model = "gpt-3.5-turbo"
 	}
 	if strings.HasPrefix(api_request.Model, "gpt-4") {
 		chatgpt_request.Model = api_request.Model
