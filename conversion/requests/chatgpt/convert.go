@@ -1,6 +1,7 @@
 package chatgpt
 
 import (
+	arkose_req "freechatgpt/internal/chatgpt"
 	chatgpt_types "freechatgpt/typings/chatgpt"
 	official_types "freechatgpt/typings/official"
 	"strings"
@@ -13,6 +14,7 @@ func ConvertAPIRequest(api_request official_types.APIRequest) chatgpt_types.Chat
 		chatgpt_request.Model = "gpt-3.5-turbo"
 	}
 	if strings.HasPrefix(api_request.Model, "gpt-4") {
+		arkose_req.Get_arkose_token()
 		chatgpt_request.Model = api_request.Model
 	}
 	if api_request.Model == "gpt-4" {
